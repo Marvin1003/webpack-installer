@@ -1,0 +1,13 @@
+[
+  {
+    "input": "Boilerplates",
+    "type": "list",
+    "message": "Choose your Preset",
+    "nested": [
+      {
+        "input": "Minimial",
+        "nested": []
+      }
+    ]
+  }
+]

@@ -16,13 +16,23 @@ Yarn
 yarn global add webpack-setup
 ```
 
+## Usage
+
+Just type `webpack-setup` in the root directory of your project.
+You can start a fresh project with **webpack-setup** or update an existing one with a well-thought-out way of using webpack.
+
 ## Info
 
 For now there is only one boilerplate - minimial - available. I will add more for different situation / libraries. I am also planning on adding a customize mode where you can create custom configs with the installer.
 
+
 ## Bugs
 
 There still might be a lot of bugs since I just started this project. I am gratefull for any help / PRs.
+
+## Disclaimer 
+
+** This is an alpha version. I recommend you to play it safe and backup your project files before using this tool ** 
 
 ## Contributing
 

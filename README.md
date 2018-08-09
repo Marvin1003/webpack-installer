@@ -5,16 +5,7 @@
 ## Installation
 
 Npm
-
-```bash
-npm install -g webpack-setup
-```
-
-Yarn
-
-```bash
-yarn global add webpack-setup
-```
+** Not yet published - soon **
 
 ## Usage
 

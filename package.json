@@ -1,5 +1,5 @@
 {
-  "name": "webpack-setup",
+  "name": "webpack-installer",
   "version": "1.0.0",
   "description": "Easily generate webpack configs.",
   "main": "index.js",
@@ -13,7 +13,7 @@
   "author": "Marvin_1003 <marvin.klaproth@gmail.com>",
   "license": "ISC",
   "bin": {
-    "webpack-setup": "./index.js"
+    "webpack-installer": "./index.js"
   },
   "dependencies": {
     "chalk": "^2.3.0",

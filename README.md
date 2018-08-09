@@ -4,17 +4,10 @@
 
 ## Installation
 
-Npm
-
 ```bash
 npm install -g webpack-installer
 ```
 
-Yarn
-
-```bash
-yarn global add webpack-installer
-```
 
 ## Usage
 

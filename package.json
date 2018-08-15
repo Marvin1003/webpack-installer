@@ -1,6 +1,6 @@
 {
   "name": "webpack-installer",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Easily generate webpack configs.",
   "main": "index.js",
   "repository": {

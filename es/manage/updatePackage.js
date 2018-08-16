@@ -1,6 +1,5 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
-const chalk = require("chalk");
 const files = require("../data/files.json");
 const getPresetData = require("../helper/getPresetData");
 const packageJSON = path.resolve(process.cwd(), "package.json");
@@ -10,8 +9,6 @@ module.exports = () => {
     if (err) throw err;
     
     const json = JSON.parse(data);
-
-    const plugins = files.boilerplates[process.env.PRESET].presets;
 
     let scripts = {
       ...files.scripts
@@ -23,7 +20,7 @@ module.exports = () => {
 
     json.scripts = mergedScripts;
     
-    fs.writeFile(packageJSON, JSON.stringify(json, null, 2), "utf-8", err => {
+    fs.writeFileSync(packageJSON, JSON.stringify(json, null, 2), "utf-8", err => {
       if (err) throw err;
     });
   });

@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
 const ora = require("ora");
@@ -13,8 +13,8 @@ module.exports = () => {
   function checkFolderExists(folderPath) {
     const dir = path.resolve(process.cwd(), folderPath);
 
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
+    if (!fs.pathExistsSync(dir)) {
+      fs.ensureDirSync(dir);
       spinner.succeed(chalk`Folder {green.bold ${folderPath}} generated.`);
     } else {
       spinner.info(chalk`Folder {green.bold ${folderPath}} already exists.`);

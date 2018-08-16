@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
 
@@ -6,8 +6,8 @@ module.exports = async (src, dest, spinner, prompt) => {
   src = path.resolve(process.cwd(), src);
   const resolvedDest = path.resolve(process.cwd(), dest);
 
-  if (!fs.existsSync(resolvedDest)) {
-    fs.copyFileSync(src, resolvedDest);
+  if (!fs.pathExistsSync(resolvedDest)) {
+    fs.copySync(src, resolvedDest);
     spinner.succeed(chalk`File {green.bold ${dest}} generated.`);
   } else {
     spinner.info(chalk`File {green.bold ${dest}} already exists.`);
@@ -19,7 +19,7 @@ module.exports = async (src, dest, spinner, prompt) => {
     });
 
     if (answer.confirm) {
-      fs.copyFileSync(src, resolvedDest);
+      fs.copySync(src, resolvedDest);
       spinner.succeed(chalk`File {green.bold ${dest}} has been overwritten.\n`);
     } else {
       spinner.info(chalk`Using current {green.bold ${dest}} file.\n`);

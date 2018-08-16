@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
   // fallback value for stats options when an option is not defined (has precedence over local webpack defaults)
   all: undefined,
@@ -97,5 +95,5 @@ module.exports = {
   version: false,
 
   // Add warnings
-  warnings: true
-};
+  warnings: true,
+}

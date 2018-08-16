@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-const installer = require("./lib/installer");
+const installer = require("./es/installer");

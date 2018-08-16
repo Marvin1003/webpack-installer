@@ -16,7 +16,7 @@ You can start a fresh project with **webpack-installer** or update an existing o
 
 ## Info
 
-For now there is only one boilerplate - minimial - available. I will add more for different situation / libraries. I am also planning on adding a customize mode where you can create custom configs with the installer.
+For now there is only one boilerplate - minimal - available. I will add more for different situation / libraries. I am also planning on adding a customize mode where you can create custom configs with the installer.
 
 ## Bugs
 

@@ -1,6 +1,6 @@
 {
   "name": "webpack-installer",
-  "version": "1.0.2",
+  "version": "1.0.2-alpha.1",
   "description": "Easily generate webpack configs.",
   "main": "index.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/Marvin1003/webpack-installer.git"
   },
   "scripts": {
-    "build": "babel --plugins transform-object-rest-spread --presets=env es --out-dir lib"
+    "build": "babel --plugins transform-object-rest-spread --presets=env es --out-dir lib --copy-files"
   },
   "keywords": [
     "Git",

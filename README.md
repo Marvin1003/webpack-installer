@@ -28,5 +28,5 @@ There still might be a lot of bugs since I just started this project. I am grate
 
 ## Contributing
 
-If you want to add a boilerplate take a look at the structure of `lib/data/files.json`. There you define the name, dependencies and presets of your boilerplate. In `lib/data/setup.json` you have to add the name, matching the one you defined in `lib/data/files.json` to make it available to the installer. At last you have to add your config to `lib/files/boilerplate/` and the optional presets to `lib/files/presets/`.
-Take a look at `lib/files/boilerplate/minimial` to see how you config needs to be structured. This approach is heavily inspired by [@TheLarkInn](https://twitter.com/thelarkinn)
+If you want to add a boilerplate take a look at the structure of `es/data/files.json`. There you define the name, dependencies and presets of your boilerplate. In `es/data/setup.json` you have to add the name, matching the one you defined in `es/data/files.json` to make it available to the installer. At last you have to add your config to `lib/files/boilerplate/` and the optional presets to `configs/files/presets/`.
+Take a look at `configs/files/boilerplate/minimial` to see how you config needs to be structured. This approach is heavily inspired by [@TheLarkInn](https://twitter.com/thelarkinn)

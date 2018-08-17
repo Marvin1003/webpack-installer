@@ -3,7 +3,6 @@ const path = require("path");
 const ora = require("ora");
 
 const exists = require("./exists");
-const files = require("../data/files.json");
 
 async function checkFile(dir, dest, spinner, prompt) {
   for (const file of fs.readdirSync(dir)) {
@@ -20,13 +19,13 @@ module.exports = async (prompt, input) => {
   const spinner = ora("Generating folder structure").start();
 
   await exists(
-    path.resolve(__dirname, "../files/presets/loadPresets.js"),
+    path.resolve(__dirname, "../../configs/presets/loadPresets.js"),
     "webpack-utils/presets/loadPresets.js",
     spinner,
     prompt
   );
   await exists(
-    path.resolve(__dirname, "../files/stats.js"),
+    path.resolve(__dirname, "../../configs/stats.js"),
     "webpack-utils/stats.js",
     spinner,
     prompt
@@ -35,7 +34,7 @@ module.exports = async (prompt, input) => {
   if (process.env.PRESET) {
     const boilerplateSRC = path.resolve(
       __dirname,
-      `../files/boilerplates/${process.env.PRESET}/`
+      `../../configs/boilerplates/${process.env.PRESET}/`
     );
 
     for (const item of fs.readdirSync(boilerplateSRC)) {

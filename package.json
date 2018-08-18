@@ -1,6 +1,6 @@
 {
   "name": "webpack-installer",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Easily generate webpack configs.",
   "main": "index.js",
   "repository": {
@@ -19,6 +19,10 @@
   "bin": {
     "webpack-installer": "./index.js"
   },
+  "engines": {
+    "node": ">=8.1.4",
+    "npm": "6.4.0"
+  },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "chalk": "^2.3.0",
@@ -26,8 +30,8 @@
     "figlet": "^1.2.0",
     "fs-extra": "^7.0.0",
     "inquirer": "^5.0.1",
-    "ora": "^3.0.0",
-    "shelljs": "^0.8.2"
+    "lodash": "^4.17.10",
+    "ora": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

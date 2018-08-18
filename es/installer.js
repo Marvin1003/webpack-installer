@@ -1,6 +1,6 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
-const shell = require("shelljs");
+const { execSync } = require("child_process");
 const chalk = require("chalk");
 const figlet = require("figlet");
 const ora = require("ora");
@@ -20,23 +20,20 @@ const createStaticFiles = require("./manage/staticFiles");
   console.log(chalk`\nWelcome to {green.bold webpack-installer}!\n`);
 
   const cliMenu = cli.generateMenu(prompt);
-  const cliDefaults = cli.defaults;
 
   let res;
   (async function menu() {
-    const result = [];
     do {
       res = await cliMenu(res);
-      res && result.push(res[cliDefaults.name]);
     } while (!Array.isArray(res));
+
+    const path = res.map(input => input.toLowerCase()).join("/");
+    process.env.CONFIG = path;
     generateConfig();
   })();
 
-  async function generateConfig() {
+  async function generateConfig(result) {
     console.log(chalk.underline`\nGenerating your config\n`);
-
-    if (res[0] === "Boilerplates") process.env.PRESET = res[1].toLowerCase();
-    else process.env.PRESET = false;
 
     let spinner = ora().start();
 
@@ -52,18 +49,16 @@ const createStaticFiles = require("./manage/staticFiles");
 
     spinner.clear();
 
-    // CHECK FOR PACKAGE.JSON
+    // CHECK IF PACKAGE.JSON EXISTS
     if (!fs.existsSync(path.resolve(process.cwd(), "package.json"))) {
       spinner.info("No package.json found");
       spinner.info("Generating package.json.");
-      shell.exec(`npm --prefix ${process.cwd()} init -y`);
+      execSync(`npm --prefix ${process.cwd()} init -y`);
       spinner.succeed("package.json created.\n");
     }
 
     dependencies();
 
-    spinner = ora("Adding scripts to package.json").start();
     await updatePackage();
-    spinner.succeed("Added scripts to package.json.");
   }
 })();

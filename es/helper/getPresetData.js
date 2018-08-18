@@ -1,9 +1,10 @@
-const files = require("../data/files.json");
+const _ = require("lodash");
+const files = require("../../installer/files.json");
 
 module.exports = (data, dataKey) => {
-  const plugins = files.boilerplates[process.env.PRESET].presets;
+  const plugins = _.get(files, process.env.CONFIG.split("/")).presets;
 
-  plugins.forEach(plugin => {
+  Array.isArray(plugins) && plugins.forEach(plugin => {
     files.presets.forEach(preset => {
       if (preset.name === plugin && Boolean(preset[dataKey])) {
         if (Array.isArray(data)) {

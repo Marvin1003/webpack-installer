@@ -10,7 +10,7 @@
     }
   ],
   "boilerplates": {
-    "minimial": {
+    "vanilla_minimial": {
       "devDependencies": [
         "css-loader",
         "style-loader"

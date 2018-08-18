@@ -1,0 +1,35 @@
+[
+  {
+    "input": "Boilerplates",
+    "type": "list",
+    "message": "Choose your environment",
+    "nested": [
+      {
+        "input": "Vanilla",
+        "type": "list",
+        "message": "Vanilla boilerplates",
+        "nested": [
+          {
+            "input": "Minimal",
+            "nested": []
+          }
+        ]
+      },
+      {
+        "input": "Libraries",
+        "message": "Choose your library",
+        "nested": [
+          {
+            "input": "React",
+            "nested": [
+              {
+                "input": "Minimal",
+                "nested": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

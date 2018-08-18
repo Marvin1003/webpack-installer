@@ -1,0 +1,41 @@
+{
+  "presets": [
+    {
+      "name": "webpack.analyze.js",
+      "dependencies": "webpack-bundle-analyzer",
+      "script": {
+        "analyze": "webpack --env.presets analyze --env.type server"
+      }
+    }
+  ],
+  "boilerplates": {
+    "vanilla": {
+      "minimal": {
+        "devDependencies": ["css-loader", "style-loader"],
+        "dependencies": ["mini-css-extract-plugin"],
+        "presets": ["webpack.analyze.js"]
+      }
+    },
+    "libraries": {
+      "react": {
+        "minimal": {
+          "devDependencies": ["babel-preset-react","css-loader", "style-loader"],
+          "dependencies": ["react", "react-dom", "mini-css-extract-plugin"],
+          "presets": ["webpack.analyze.js"]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --hot --env.mode development --env.port 3000",
+    "build": "webpack --env.mode production --progress"
+  },
+  "devDependencies": [
+    "webpack",
+    "webpack-cli",
+    "webpack-dev-server",
+    "webpack-merge",
+    "clean-webpack-plugin"
+  ],
+  "dependencies": ["babel-loader", "babel-core", "babel-preset-env"]
+}

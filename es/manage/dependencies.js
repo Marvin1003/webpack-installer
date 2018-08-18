@@ -7,7 +7,6 @@ const getPresetData = require("../helper/getPresetData");
 module.exports = () => {
   const spinner = ora("Installing dependencies").start();
   console.log();
-  console.log();
 
   let devDependencies = [
     ...files.devDependencies,
@@ -28,11 +27,9 @@ module.exports = () => {
 
   function install(dependencies, flag) {
     if (Array.isArray(dependencies))
-      execSync(
-        `npm --prefix ${process.cwd()} install ${dependencies.join(
-          " "
-        )} ${flag}`
-      );
+      execSync(`npm install ${dependencies.join(" ")} ${flag} --silent`, {
+        cwd: process.cwd()
+      });
   }
 
   spinner.succeed("Dependencies installed");

@@ -16,7 +16,7 @@ You can start a fresh project with **webpack-installer** or update an existing o
 
 ## Info
 
-For now there is only one boilerplate - minimal - available. I will add more for different situation / libraries. I am also planning on adding a customize mode where you can create custom configs with the installer.
+I will add more boilerplates for different situation / libraries. But I dont know about each library its dependencies etc. so PRs with new boilerplates are always welcome. I am also planning on adding a customize mode where you can create custom configs within the installer.
 
 ## Bugs
 
@@ -28,5 +28,5 @@ There still might be a lot of bugs since I just started this project. I am grate
 
 ## Contributing
 
-If you want to add a boilerplate take a look at the structure of `es/data/files.json`. There you define the name, dependencies and presets of your boilerplate. In `es/data/setup.json` you have to add the name, matching the one you defined in `es/data/files.json` to make it available to the installer. At last you have to add your config to `lib/files/boilerplate/` and the optional presets to `configs/files/presets/`.
-Take a look at `configs/files/boilerplate/minimial` to see how you config needs to be structured. This approach is heavily inspired by [@TheLarkInn](https://twitter.com/thelarkinn)
+If you want to add a boilerplate take a look at the structure of `installer/files.json`. There you define the name, dependencies and presets of your boilerplate. In `installer/setup.json` you have to add the name, matching the one you defined in `installer/files.json` to make it available to the installer. At last you have to add your config to `configs/boilerplates/` and the optional presets to `configs/presets/`.
+Take a look at `configs/boilerplates/vanilla/minimal` to see how you config needs to be structured. This approach is heavily inspired by [@TheLarkInn](https://twitter.com/thelarkinn)

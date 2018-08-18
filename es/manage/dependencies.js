@@ -1,19 +1,22 @@
-const shell = require("shelljs");
+const _ = require("lodash");
+const { execSync } = require("child_process");
 const ora = require("ora");
-const files = require("../data/files.json");
+const files = require("../../installer/files.json");
 const getPresetData = require("../helper/getPresetData");
 
 module.exports = () => {
-  const spinner = ora("Installing dependencies\n").start();
+  const spinner = ora("Installing dependencies").start();
+  console.log();
+  console.log();
 
   let devDependencies = [
     ...files.devDependencies,
-    ...files.boilerplates[process.env.PRESET].devDependencies
+    ..._.get(files, process.env.CONFIG.split("/")).devDependencies
   ];
 
   let dependencies = [
     ...files.dependencies,
-    ...files.boilerplates[process.env.PRESET].dependencies
+    ..._.get(files, process.env.CONFIG.split("/")).dependencies
   ];
 
   devDependencies = getPresetData(devDependencies, "devDependencies");
@@ -21,15 +24,16 @@ module.exports = () => {
   dependencies = getPresetData(dependencies, "dependencies");
 
   install(devDependencies, "--save-dev");
-  install(dependencies, "");
+  install(dependencies, "--save-prod");
 
-  function install(dependency, flag) {
-    if (Array.isArray(dependency)) {
-      dependency = dependency.join(" ");
-      shell.exec(`npm --prefix ${process.cwd()} install ${dependency} ${flag}`);
-    }
+  function install(dependencies, flag) {
+    if (Array.isArray(dependencies))
+      execSync(
+        `npm --prefix ${process.cwd()} install ${dependencies.join(
+          " "
+        )} ${flag}`
+      );
   }
 
-  console.log();
-  spinner.succeed("Dependencies installed\n");
+  spinner.succeed("Dependencies installed");
 };

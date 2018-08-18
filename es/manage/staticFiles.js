@@ -31,32 +31,31 @@ module.exports = async (prompt, input) => {
     prompt
   );
 
-  if (process.env.PRESET) {
-    const boilerplateSRC = path.resolve(
-      __dirname,
-      `../../configs/boilerplates/${process.env.PRESET}/`
-    );
+  const boilerplateSRC = path.resolve(
+    __dirname,
+    `../../configs/${process.env.CONFIG}/`
+  );
 
-    for (const item of fs.readdirSync(boilerplateSRC)) {
-      const src = path.resolve(boilerplateSRC, item);
-      const stats = fs.statSync(src);
-      if (stats.isDirectory()) {
-        for (const elem of fs.readdirSync(src)) {
-          const utilPath = path.resolve(src, elem);
-          switch (elem) {
-            case "configs": {
-              await checkFile(utilPath, "configs", spinner, prompt);
-              break;
-            }
-            case "presets": {
-              await checkFile(utilPath, "presets", spinner, prompt);
-              break;
-            }
+  for (const item of fs.readdirSync(boilerplateSRC)) {
+    const src = path.resolve(boilerplateSRC, item);
+    const stats = fs.statSync(src);
+    if (stats.isDirectory()) {
+      for (const elem of fs.readdirSync(src)) {
+        const utilPath = path.resolve(src, elem);
+        
+        switch (elem) {
+          case "configs": {
+            await checkFile(utilPath, "configs", spinner, prompt);
+            break;
+          }
+          case "presets": {
+            await checkFile(utilPath, "presets", spinner, prompt);
+            break;
           }
         }
-      } else if (stats.isFile()) {
-        await exists(src, item, spinner, prompt);
       }
+    } else if (stats.isFile()) {
+      await exists(src, item, spinner, prompt);
     }
   }
 };

@@ -14,6 +14,9 @@ const updatePackage = require("./manage/updatePackage");
 const dependencies = require("./manage/dependencies");
 const createStaticFiles = require("./manage/staticFiles");
 
+process.env.PREFIX = "installer:";
+process.env.SCRIPTS = [];
+
 (async function setup() {
   console.clear();
   console.log(chalk.green(figlet.textSync("webpack  -  installer")));
@@ -35,30 +38,34 @@ const createStaticFiles = require("./manage/staticFiles");
   async function generateConfig(result) {
     console.log(chalk.underline`\nGenerating your config\n`);
 
-    let spinner = ora().start();
-
-    spinner.info("Generating folder structure ...\n");
-    await createFolder(prompt);
-    console.log();
-    spinner.succeed("Folder structure generated.\n");
-
-    spinner.info("Generating static files ...\n");
-    await createStaticFiles(prompt, res);
-    console.log();
-    spinner.succeed("Static files generated.\n");
-
-    spinner.clear();
-
     // CHECK IF PACKAGE.JSON EXISTS
     if (!fs.existsSync(path.resolve(process.cwd(), "package.json"))) {
-      spinner.info("No package.json found");
-      spinner.info("Generating package.json.");
-      execSync(`npm --prefix ${process.cwd()} init -y`);
-      spinner.succeed("package.json created.\n");
+      const spinner = ora("Initalizing npm project").start();
+      execSync(`npm init -y`, { cwd: process.cwd() });
+      spinner.succeed(chalk`Npm project initialised.\n`);
     }
 
     dependencies();
+    updatePackage();
 
-    await updatePackage();
+    await createFolder(prompt);
+    await createStaticFiles(prompt, res);
+
+    if (!fs.pathExistsSync(path.resolve(process.cwd(), "src"))) {
+      const answer = await prompt({
+        type: "confirm",
+        message: chalk`Do you want to create {green.bold src/index.js}?`,
+        name: "confirm"
+      });
+      if (answer.confirm) {
+        fs.createFileSync("src/index.js");
+        ora().info(chalk`File {green.bold src/index.js} created.`);
+      }
+    }
+
+    console.log(chalk.underline`\nAvailable scripts:\n`);
+    for (const script of process.env.SCRIPTS.split(",")) {
+      console.log(chalk`npm run {green.bold ${script}}`);
+    }
   }
 })();

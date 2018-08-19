@@ -3,21 +3,28 @@ const path = require("path");
 const chalk = require("chalk");
 const ora = require("ora");
 
-module.exports = () => {
-  const spinner = ora("Generating folder structure").start();
+module.exports = async () => {
+  console.log();
+  const spinner = ora("Creating folder structure");
 
-  checkFolderExists("webpack-utils");
-  checkFolderExists("webpack-utils/presets");
-  checkFolderExists("webpack-utils/configs");
+  await Promise.all([
+    checkFolderExists("webpack-utils"),
+    checkFolderExists("webpack-utils/presets"),
+    checkFolderExists("webpack-utils/configs", true)
+  ]);
 
-  function checkFolderExists(folderPath) {
+  spinner.succeed("Folder structure created.\n");
+
+  async function checkFolderExists(folderPath, enter) {
     const dir = path.resolve(process.cwd(), folderPath);
 
     if (!fs.pathExistsSync(dir)) {
-      fs.ensureDirSync(dir);
-      spinner.succeed(chalk`Folder {green.bold ${folderPath}} generated.`);
+      fs.ensureDir(dir, err => {
+        if (err) throw err;
+      });
     } else {
       spinner.info(chalk`Folder {green.bold ${folderPath}} already exists.`);
+      enter && console.log();
     }
     spinner.clear();
   }

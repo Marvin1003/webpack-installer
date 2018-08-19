@@ -1,17 +1,16 @@
 const fs = require("fs-extra");
-const ora = require("ora");
 const path = require("path");
+const ora = require("ora");
+const chalk = require("chalk");
 const files = require("../../installer/files.json");
 const addPrefix = require("../helper/addPrefix");
 const getPresetData = require("../helper/getPresetData");
 const packageJSON = path.resolve(process.cwd(), "package.json");
 
 module.exports = () => {
-  const prefix = "installer:";
+  const data = fs.readFileSync(packageJSON, "utf-8");
 
-  fs.readFile(packageJSON, "utf-8", (err, data) => {
-    if (err) throw err;
-
+  if (data) {
     console.log();
     const spinner = ora("Updating package.json").start();
 
@@ -23,17 +22,18 @@ module.exports = () => {
 
     scripts = getPresetData(scripts, "script");
 
-    addPrefix(scripts, prefix);
+    addPrefix(scripts, process.env.PREFIX);
+
+    process.env.SCRIPTS = Object.keys(scripts);
 
     const mergedScripts = Object.assign({}, json.scripts, scripts);
 
     json.scripts = mergedScripts;
 
-    fs.writeFile(packageJSON, JSON.stringify(json, null, 2), "utf-8", err => {
-      if (err) throw err;
+    fs.writeFileSync(packageJSON, JSON.stringify(json, null, 2), "utf-8");
 
-      console.log();
-      spinner.succeed("Updated package.json\n");
-    });
-  });
+    spinner.succeed(chalk`Updated {green.bold package.json}.`);
+  } else {
+    spinner.fail("Something went wrong.\n");
+  }
 };

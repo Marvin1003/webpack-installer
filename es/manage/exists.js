@@ -6,10 +6,8 @@ module.exports = async (src, dest, spinner, prompt) => {
   src = path.resolve(process.cwd(), src);
   const resolvedDest = path.resolve(process.cwd(), dest);
 
-  if (!fs.pathExistsSync(resolvedDest)) {
-    fs.copySync(src, resolvedDest);
-    spinner.succeed(chalk`File {green.bold ${dest}} generated.`);
-  } else {
+  if (!fs.pathExistsSync(resolvedDest)) fs.copySync(src, resolvedDest);
+  else {
     spinner.info(chalk`File {green.bold ${dest}} already exists.`);
 
     const answer = await prompt({

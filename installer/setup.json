@@ -27,6 +27,15 @@
                 "nested": []
               }
             ]
+          },
+          {
+            "input": "Vue",
+            "nested": [
+              {
+                "input": "Minimal",
+                "nested": []
+              }
+            ]
           }
         ]
       }

@@ -16,7 +16,7 @@ async function checkFile(dir, dest, spinner, prompt) {
 }
 
 module.exports = async (prompt, input) => {
-  const spinner = ora("Generating folder structure").start();
+  const spinner = ora("Creating files").start();
 
   await exists(
     path.resolve(__dirname, "../../configs/presets/loadPresets.js"),
@@ -24,6 +24,7 @@ module.exports = async (prompt, input) => {
     spinner,
     prompt
   );
+  
   await exists(
     path.resolve(__dirname, "../../configs/stats.js"),
     "webpack-utils/stats.js",
@@ -42,7 +43,7 @@ module.exports = async (prompt, input) => {
     if (stats.isDirectory()) {
       for (const elem of fs.readdirSync(src)) {
         const utilPath = path.resolve(src, elem);
-        
+
         switch (elem) {
           case "configs": {
             await checkFile(utilPath, "configs", spinner, prompt);
@@ -58,4 +59,5 @@ module.exports = async (prompt, input) => {
       await exists(src, item, spinner, prompt);
     }
   }
+  spinner.succeed("Files created.\n");
 };

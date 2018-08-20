@@ -4,9 +4,11 @@ const chalk = require("chalk");
 
 module.exports = async (src, dest, spinner, prompt) => {
   src = path.resolve(process.cwd(), src);
+  const stats = fs.statSync(src);
   const resolvedDest = path.resolve(process.cwd(), dest);
 
-  if (!fs.pathExistsSync(resolvedDest)) fs.copySync(src, resolvedDest);
+  if (stats.isFile() && !fs.pathExistsSync(resolvedDest))
+    fs.copySync(src, resolvedDest);
   else {
     spinner.info(chalk`File {green.bold ${dest}} already exists.`);
 

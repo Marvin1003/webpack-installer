@@ -32,17 +32,21 @@ process.env.SCRIPTS = [];
 
     const path = res.map(input => input.toLowerCase()).join("/");
     process.env.CONFIG = path;
-    generateConfig();
+    generateConfig(res);
   })();
 
-  async function generateConfig(result) {
-    console.log(chalk.underline`\nGenerating your config\n`);
+  async function generateConfig(configType) {
+    const configStr = `${configType[configType.length - 2]} - ${
+      configType[configType.length - 1]
+    }`;
 
+    console.log(chalk.underline(`\nGenerating ${configStr} config.\n`));
+    
     // CHECK IF PACKAGE.JSON EXISTS
     if (!fs.existsSync(path.resolve(process.cwd(), "package.json"))) {
       const spinner = ora("Initalizing npm project").start();
       execSync(`npm init -y`, { cwd: process.cwd() });
-      spinner.succeed(chalk`Npm project initialised.\n`);
+      spinner.succeed(chalk("Npm project initialised.\n"));
     }
 
     dependencies();
@@ -63,7 +67,7 @@ process.env.SCRIPTS = [];
       }
     }
 
-    console.log(chalk.underline`\nAvailable scripts:\n`);
+    console.log(chalk.underline("\nAvailable scripts:\n"));
     for (const script of process.env.SCRIPTS.split(",")) {
       console.log(chalk`npm run {green.bold ${script}}`);
     }

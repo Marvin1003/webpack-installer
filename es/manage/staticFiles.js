@@ -1,7 +1,8 @@
 const fs = require("fs-extra");
 const path = require("path");
 const ora = require("ora");
-
+const _ = require("lodash");
+const files = require("../../installer/files.json");
 const exists = require("./exists");
 
 async function checkFile(dir, dest, spinner, prompt) {
@@ -24,7 +25,7 @@ module.exports = async (prompt, input) => {
     spinner,
     prompt
   );
-  
+
   await exists(
     path.resolve(__dirname, "../../configs/stats.js"),
     "webpack-utils/stats.js",
@@ -39,25 +40,30 @@ module.exports = async (prompt, input) => {
 
   for (const item of fs.readdirSync(boilerplateSRC)) {
     const src = path.resolve(boilerplateSRC, item);
-    const stats = fs.statSync(src);
+    var stats = fs.statSync(src);
+
     if (stats.isDirectory()) {
       for (const elem of fs.readdirSync(src)) {
         const utilPath = path.resolve(src, elem);
+        stats = fs.statSync(utilPath);
 
-        switch (elem) {
-          case "configs": {
-            await checkFile(utilPath, "configs", spinner, prompt);
-            break;
-          }
-          case "presets": {
-            await checkFile(utilPath, "presets", spinner, prompt);
-            break;
-          }
-        }
+        await checkFile(utilPath, elem, spinner, prompt);
       }
-    } else if (stats.isFile()) {
+    } else {
       await exists(src, item, spinner, prompt);
     }
   }
+
+  const presets = _.get(files, process.env.CONFIG.split("/")).presets;
+
+  for (const fileName of presets) {
+    await exists(
+      path.resolve(__dirname, `../../configs/presets/${fileName}`),
+      `webpack-utils/presets/${fileName}`,
+      spinner,
+      prompt
+    );
+  }
+
   spinner.succeed("Files created.\n");
 };

@@ -4,14 +4,14 @@
       "name": "webpack.analyze.js",
       "dependencies": "webpack-bundle-analyzer",
       "script": {
-        "analyze": "webpack --env.presets analyze --env.type server"
+        "analyze": "webpack --env.presets analyze --env.options server"
       }
     },
     {
       "name": "webpack.clean.js",
       "devDependencies": "clean-webpack-plugin",
       "script": {
-        "analyze": "webpack --env.presets clean"
+        "clean": "webpack --env.presets clean --env.options dist"
       }
     }
   ],
@@ -20,6 +20,18 @@
       "minimal": {
         "devDependencies": ["css-loader", "style-loader"],
         "dependencies": ["mini-css-extract-plugin"]
+      },
+      "standard": {
+        "devDependencies": [
+          "css-loader",
+          "style-loader",
+          "optimize-css-assets-webpack-plugin",
+          "file-loader",
+          "url-loader",
+          "html-webpack-plugin"
+        ],
+        "dependencies": ["mini-css-extract-plugin"],
+        "presets": ["webpack.analyze.js", "webpack.clean.js"]
       }
     },
     "libraries": {

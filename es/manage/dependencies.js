@@ -32,5 +32,5 @@ module.exports = () => {
       });
   }
 
-  spinner.succeed("Dependencies installed");
+  spinner.succeed("Dependencies installed.");
 };

@@ -10,7 +10,7 @@ const modeConfig = ({ mode, port }) =>
 module.exports = ({
   mode = "production",
   presets = [],
-  type = "",
+  options = "",
   port = 3000
 }) =>
   webpackMerge(
@@ -28,5 +28,5 @@ module.exports = ({
       }
     },
     modeConfig({ mode, port }),
-    loadPresets({ mode, presets, type })
+    loadPresets({ mode, presets, options })
   );

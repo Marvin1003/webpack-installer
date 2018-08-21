@@ -56,13 +56,15 @@ module.exports = async (prompt, input) => {
 
   const presets = _.get(files, process.env.CONFIG.split("/")).presets;
 
-  for (const fileName of presets) {
-    await exists(
-      path.resolve(__dirname, `../../configs/presets/${fileName}`),
-      `webpack-utils/presets/${fileName}`,
-      spinner,
-      prompt
-    );
+  if (Array.isArray()) {
+    for (const fileName of presets) {
+      await exists(
+        path.resolve(__dirname, `../../configs/presets/${fileName}`),
+        `webpack-utils/presets/${fileName}`,
+        spinner,
+        prompt
+      );
+    }
   }
 
   spinner.succeed("Files created.\n");

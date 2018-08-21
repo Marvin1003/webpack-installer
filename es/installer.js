@@ -40,7 +40,7 @@ process.env.SCRIPTS = [];
       configType[configType.length - 1]
     }`;
 
-    console.log(chalk.underline(`\nGenerating ${configStr} config.\n`));
+    console.log(chalk.underline(`\nCreating ${configStr} config.\n`));
     
     // CHECK IF PACKAGE.JSON EXISTS
     if (!fs.existsSync(path.resolve(process.cwd(), "package.json"))) {

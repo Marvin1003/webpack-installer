@@ -56,7 +56,7 @@ module.exports = async (prompt, input) => {
 
   const presets = _.get(files, process.env.CONFIG.split("/")).presets;
 
-  if (Array.isArray()) {
+  if (Array.isArray(presets)) {
     for (const fileName of presets) {
       await exists(
         path.resolve(__dirname, `../../configs/presets/${fileName}`),

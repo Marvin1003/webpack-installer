@@ -38,7 +38,7 @@
       "react": {
         "minimal": {
           "devDependencies": [
-            "babel-preset-react",
+            "@babel/preset-react",
             "css-loader",
             "style-loader"
           ],
@@ -64,5 +64,5 @@
     "webpack-merge",
     "clean-webpack-plugin"
   ],
-  "dependencies": ["babel-loader", "babel-core", "babel-preset-env"]
+  "dependencies": ["babel-loader", "@babel/core", "@babel/preset-env"]
 }

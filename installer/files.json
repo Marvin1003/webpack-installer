@@ -62,7 +62,8 @@
     "webpack-cli",
     "webpack-dev-server",
     "webpack-merge",
-    "clean-webpack-plugin"
+    "clean-webpack-plugin",
+    "terser-webpack-plugin"
   ],
   "dependencies": ["babel-loader", "@babel/core", "@babel/preset-env"]
 }

@@ -18,7 +18,8 @@ process.env.PREFIX = "installer:";
 process.env.SCRIPTS = [];
 
 (async function setup() {
-  console.clear();
+  if ("clear" in global.console) console.clear();
+
   console.log(chalk.green(figlet.textSync("webpack  -  installer")));
   console.log(chalk`\nWelcome to {green.bold webpack-installer}!\n`);
 
@@ -41,7 +42,7 @@ process.env.SCRIPTS = [];
     }`;
 
     console.log(chalk.underline(`\nCreating ${configStr} config.\n`));
-    
+
     // CHECK IF PACKAGE.JSON EXISTS
     if (!fs.existsSync(path.resolve(process.cwd(), "package.json"))) {
       const spinner = ora("Initalizing npm project").start();

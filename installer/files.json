@@ -48,7 +48,12 @@
       "vue": {
         "minimal": {
           "devDependencies": ["css-loader", "style-loader"],
-          "dependencies": ["vue", "mini-css-extract-plugin"]
+          "dependencies": [
+            "vue",
+            "vue-loader",
+            "vue-template-compiler",
+            "mini-css-extract-plugin"
+          ]
         }
       }
     }

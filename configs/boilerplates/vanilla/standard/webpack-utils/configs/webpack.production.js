@@ -1,12 +1,8 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = ({ mode }) => ({
   mode,
-  optimization: {
-    minimizer: [new TerserPlugin()]
-  },
   output: {
     filename: "static/commons/[name]/[name].[contenthash].js",
     chunkFilename: "chunks/[name]/[name].[contenthash].js",

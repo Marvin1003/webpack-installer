@@ -1,11 +1,7 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = ({ mode }) => ({
   mode,
-  optimization: {
-    minimizer: [new TerserPlugin()]
-  },
   module: {
     rules: [
       {

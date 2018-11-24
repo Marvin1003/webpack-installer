@@ -32,7 +32,7 @@
         ],
         "dependencies": ["mini-css-extract-plugin"],
         "presets": ["webpack.analyze.js", "webpack.clean.js"]
-      }
+      },
     },
     "libraries": {
       "react": {

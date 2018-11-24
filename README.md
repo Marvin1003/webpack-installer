@@ -8,11 +8,18 @@
 npm install -g webpack-installer
 ```
 
-
 ## Usage
 
 Just type `webpack-installer` in the root directory of your project.
 You can start a fresh project with **webpack-installer** or update an existing one with a well-thought-out way of using webpack.
+
+<img src="docs/images/usage/screen_1.png" alt="IDE Screen 1" height="200">
+<img src="docs/images/usage/screen_2.png" alt="IDE Screen 2" height="200">
+<img src="docs/images/usage/screen_3.png" alt="IDE Screen 3" height="200">
+<img src="docs/images/usage/screen_4.png" alt="IDE Screen 4" height="200">
+<img src="docs/images/usage/screen_5.png" alt="IDE Screen 5" height="200">
+<img src="docs/images/usage/screen_6.png" alt="IDE Screen 6" height="200">
+<img src="docs/images/usage/screen_7.png" alt="IDE Screen 7" height="200">
 
 ## Info
 
@@ -22,11 +29,28 @@ I will add more boilerplates for different situation / libraries. But I dont kno
 
 There still might be a lot of bugs since I just started this project. I am gratefull for any help / PRs.
 
-## Disclaimer
+## How can I add my boilerplate?
 
-** This is an alpha version. I recommend you to play it safe and backup your project files before using this tool **
+### Step 1
 
-## Contributing
+First of all you have to take a look at `installer/files.json`. In this example we add a boilerplate to the vanilla boilerplates.
+The structure of `files.json` represents the hierarchy of the installer menu, so add an object at the place where you want your boilerplate to be displayed in the installer. The key has to be the name of your boilerplate. 
+You can define the `devDependencies` and `dependencies` of your boilerplate here. Those will get automatically installed in the generation process of your boilerplate.
 
-If you want to add a boilerplate take a look at the structure of `installer/files.json`. There you define the name, dependencies and presets of your boilerplate. In `installer/setup.json` you have to add the name, matching the one you defined in `installer/files.json` to make it available to the installer. At last you have to add your config to `configs/boilerplates/` and the optional presets to `configs/presets/`.
-Take a look at `configs/boilerplates/vanilla/minimal` to see how you config needs to be structured. This approach is heavily inspired by [@TheLarkInn](https://twitter.com/thelarkinn)
+<img src="docs/images/contributing/files_json.png" alt="files.json">
+
+### Step 2
+
+Then you have to take a look at `installer/setup.json`.  This file is responsible for making your boilerplate visible in the CLI. Its the same as in the `files.json` file. The structure represents the hierarchy of the installer. You have to add an object at the right place with to keys: `input` and `nested`. In the `input` key you have to put the name of your boilerplate that you also used in the `files.json`. In the `nested` key just put an empty array.
+
+<img src="docs/images/contributing/setup_json.png" alt="setup.json">
+
+### Step 3
+
+Your almost done! You only have to add your boilerplate files to `configs/boilerplates/`. Same as usual, paste it at the right place, like in the `files.json` and `setup.json`.
+In this case we want the boilerplate to be under `configs/boilerplates/vanilla`. Keep in mind the folder name of your boilerplate has to inline with names you provided in the other configuration files.
+
+<img src="docs/images/contributing/boilerplate.png" alt="Boilerplate">
+
+
+Thanks to the [@TheLarkInn](https://twitter.com/thelarkinn) for inspiring and motivating me to this project.

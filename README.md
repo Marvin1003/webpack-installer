@@ -44,7 +44,7 @@ There still might be a lot of bugs since I just started this project. I am grate
 
 ### Step 1
 
-First of all you have to take a look at `installer/files.json`. In this example we add a boilerplate to the vanilla boilerplates.
+Take a look at `installer/files.json`. In this example we add a boilerplate to the vanilla boilerplates.
 The structure of `files.json` represents the hierarchy of the installer menu, so add an object at the place where you want your boilerplate to be displayed in the installer. The key has to be the name of your boilerplate. 
 You can define the `devDependencies` and `dependencies` of your boilerplate here. Those will get automatically installed in the generation process of your boilerplate.
 
@@ -58,11 +58,10 @@ Then you have to take a look at `installer/setup.json`.  This file is responsibl
 
 ### Step 3
 
-Your almost done! You only have to add your boilerplate files to `configs/boilerplates/`. Same as usual, paste it at the right place, like in the `files.json` and `setup.json`.
+Your almost done! Now only have to add your boilerplate files to `configs/boilerplates/`. Same as usual, paste it at the right place, like in the `files.json` and `setup.json`.
 In this case we want the boilerplate to be under `configs/boilerplates/vanilla`. Keep in mind the folder name of your boilerplate has to inline with names you provided in the other configuration files.
 
 <img src="docs/images/contributing/boilerplate.png" alt="Boilerplate" height="500">
-
 
 Thanks to the [@TheLarkInn](https://twitter.com/thelarkinn) for inspiring and motivating me to this project.
 

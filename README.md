@@ -2,11 +2,13 @@
 
 **webpack-installer** is an installer to easily generate webpack configs.
 
+
 ## Installation
 
 ```bash
 npm install -g webpack-installer
 ```
+
 
 ## Usage
 
@@ -23,13 +25,16 @@ You can start a fresh project with **webpack-installer** or update an existing o
   <img src="docs/images/usage/screen_7.png" alt="IDE Screen 7" height="200">
 </div>
 
+
 ## Info
 
 I will add more boilerplates for different situation / libraries. But I dont know about each library its dependencies etc. so PRs with new boilerplates are always welcome. I am also planning on adding a customize mode where you can create custom configs within the installer.
 
+
 ## Bugs
 
 There still might be a lot of bugs since I just started this project. I am gratefull for any help / PRs.
+
 
 ## How can I add my boilerplate?
 

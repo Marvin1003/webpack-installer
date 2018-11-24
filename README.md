@@ -13,13 +13,15 @@ npm install -g webpack-installer
 Just type `webpack-installer` in the root directory of your project.
 You can start a fresh project with **webpack-installer** or update an existing one with a well-thought-out way of using webpack.
 
-<img src="docs/images/usage/screen_1.png" alt="IDE Screen 1" height="200">
-<img src="docs/images/usage/screen_2.png" alt="IDE Screen 2" height="200">
-<img src="docs/images/usage/screen_3.png" alt="IDE Screen 3" height="200">
-<img src="docs/images/usage/screen_4.png" alt="IDE Screen 4" height="200">
-<img src="docs/images/usage/screen_5.png" alt="IDE Screen 5" height="200">
-<img src="docs/images/usage/screen_6.png" alt="IDE Screen 6" height="200">
-<img src="docs/images/usage/screen_7.png" alt="IDE Screen 7" height="200">
+<div float="left">
+  <img src="docs/images/usage/screen_1.png" alt="IDE Screen 1" height="200">
+  <img src="docs/images/usage/screen_2.png" alt="IDE Screen 2" height="200">
+  <img src="docs/images/usage/screen_3.png" alt="IDE Screen 3" height="200">
+  <img src="docs/images/usage/screen_4.png" alt="IDE Screen 4" height="200">
+  <img src="docs/images/usage/screen_5.png" alt="IDE Screen 5" height="200">
+  <img src="docs/images/usage/screen_6.png" alt="IDE Screen 6" height="200">
+  <img src="docs/images/usage/screen_7.png" alt="IDE Screen 7" height="200">
+</div>
 
 ## Info
 

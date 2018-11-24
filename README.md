@@ -1,4 +1,8 @@
 # webpack-installer
+[![npm][npm]][npm-url]
+[![dependencies][dependencies]][dependencies-url]
+[![code style: prettier][prettier]][prettier-url]
+
 
 **webpack-installer** is an installer to easily generate webpack configs.
 
@@ -61,3 +65,11 @@ In this case we want the boilerplate to be under `configs/boilerplates/vanilla`.
 
 
 Thanks to the [@TheLarkInn](https://twitter.com/thelarkinn) for inspiring and motivating me to this project.
+
+
+[npm]: https://img.shields.io/npm/v/webpack-installer.svg
+[npm-url]: https://npmjs.com/package/webpack-installer
+[dependencies]: https://img.shields.io/david/Marvin1003/webpack-installer.svg
+[dependencies-url]: https://david-dm.org/Marvin1003/webpack-installer
+[prettier]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
+[prettier-url]: https://github.com/prettier/prettier

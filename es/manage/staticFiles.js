@@ -2,23 +2,12 @@ const fs = require("fs-extra");
 const path = require("path");
 const ora = require("ora");
 const _ = require("lodash");
-const files = require("../../installer/files.json");
 const exists = require("./exists");
 
-async function checkFile(dir, dest, spinner, prompt) {
-  for (const file of fs.readdirSync(dir)) {
-    await exists(
-      path.resolve(dir, file),
-      `webpack-utils/${dest}/${file}`,
-      spinner,
-      prompt
-    );
-  }
-}
-
-module.exports = async (prompt, input) => {
+module.exports = async (prompt, configName, { presets = [] }) => {
   const spinner = ora("Creating files").start();
 
+  // OBLIGATORY GLOBAL FILES
   await exists(
     path.resolve(__dirname, "../../configs/presets/loadPresets.js"),
     "webpack-utils/presets/loadPresets.js",
@@ -33,34 +22,34 @@ module.exports = async (prompt, input) => {
     prompt
   );
 
-  const boilerplateSRC = path.resolve(
-    __dirname,
-    `../../configs/${process.env.CONFIG}/`
-  );
+  // BOILERPLATE RELATED FILES
+  await createFiles(process.env.BOILERPLATE_FOLDER);
 
-  for (const item of fs.readdirSync(boilerplateSRC)) {
-    const src = path.resolve(boilerplateSRC, item);
-    var stats = fs.statSync(src);
-
+  async function createFiles(dir) {
+    const stats = fs.statSync(dir);
     if (stats.isDirectory()) {
-      for (const elem of fs.readdirSync(src)) {
-        const utilPath = path.resolve(src, elem);
-        stats = fs.statSync(utilPath);
-
-        await checkFile(utilPath, elem, spinner, prompt);
+      for (const item of fs.readdirSync(dir)) {
+        const utilPath = path.resolve(dir, item);
+        await createFiles(utilPath);
       }
-    } else {
-      await exists(src, item, spinner, prompt);
+    } else if (stats.isFile()) {
+      let pathArr = dir.split("/");
+
+      const wi = pathArr.indexOf("webpack-installer");
+      pathArr = pathArr.slice(wi);
+
+      const i = pathArr.indexOf(configName.toLowerCase());
+      const dest = pathArr.slice(i + 1).join("/");
+      await exists(dir, dest, spinner, prompt);
     }
   }
 
-  const presets = _.get(files, process.env.CONFIG.split("/")).presets;
-
-  if (Array.isArray(presets)) {
-    for (const fileName of presets) {
+  // GLOBAL PRESETS
+  for (const preset of presets) {
+    if (typeof preset === "string") {
       await exists(
-        path.resolve(__dirname, `../../configs/presets/${fileName}`),
-        `webpack-utils/presets/${fileName}`,
+        path.resolve(__dirname, `../../configs/presets/${preset}`),
+        `webpack-utils/presets/${preset}`,
         spinner,
         prompt
       );

@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const files = require("../../installer/files.json");
+const files = require("../../data/installer:global.json");
 
 module.exports = (data, dataKey) => {
   const plugins = _.get(files, process.env.CONFIG.split("/")).presets;

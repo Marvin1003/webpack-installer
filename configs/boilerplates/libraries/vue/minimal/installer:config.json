@@ -1,0 +1,14 @@
+{
+  "package": {
+    "devDependencies": {
+      "css-loader": "latest",
+      "style-loader": "latest"
+    },
+    "dependencies": {
+      "vue": "latest",
+      "vue-loader": "latest",
+      "vue-template-compiler": "latest",
+      "mini-css-extract-plugin": "latest"
+    }
+  }
+}

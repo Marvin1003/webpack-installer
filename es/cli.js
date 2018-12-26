@@ -1,4 +1,4 @@
-const json = require("../installer/setup.json");
+const json = require("../data/installer:setup.json");
 const findNextMenu = require("./helper/findNextMenu");
 
 const result = [];

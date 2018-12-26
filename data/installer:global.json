@@ -1,0 +1,34 @@
+{
+  "package": {
+    "devDependencies": {
+      "webpack": "latest",
+      "webpack-cli": "latest",
+      "webpack-dev-server": "latest",
+      "webpack-merge": "latest",
+      "clean-webpack-plugin": "latest"
+    },
+    "dependencies": {
+      "babel-loader": "latest",
+      "@babel/core": "latest",
+      "@babel/preset-env": "latest"
+    }
+  },
+  "presets": {
+    "webpack.analyze.js": {
+      "dependencies": {
+        "webpack-bundle-analyzer": "latest"
+      },
+      "scripts": {
+        "analyze": "webpack --env.presets analyze --env.options server"
+      }
+    },
+    "webpack.clean.js": {
+      "devDependencies": {
+        "clean-webpack-plugin": "latest"
+      },
+      "scripts": {
+        "clean": "webpack --env.presets clean --env.options dist"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "package": {
+    "devDependencies": {
+      "css-loader": "latest",
+      "style-loader": "latest"
+    },
+    "dependencies": {
+      "mini-css-extract-plugin": "latest"
+    },
+    "scripts": {
+      "dev": "webpack-dev-server --hot --env.mode development --env.port 3000",
+      "build": "webpack --env.mode production --progress"
+    }
+  },
+  "presets": ["webpack.clean.js", "webpack.analyze.js"]
+}

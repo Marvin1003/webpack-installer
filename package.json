@@ -1,6 +1,6 @@
 {
   "name": "webpack-installer",
-  "version": "1.2.5",
+  "version": "2.0.0",
   "description": "Easily generate webpack configs.",
   "main": "lib/installer.js",
   "repository": {
@@ -8,7 +8,8 @@
     "url": "https://github.com/Marvin1003/webpack-installer.git"
   },
   "scripts": {
-    "build": "babel es --out-dir lib --copy-files --plugins=@babel/transform-runtime --presets=@babel/env"
+    "build": "babel es --out-dir lib --copy-files --plugins=@babel/transform-runtime --presets=@babel/env",
+    "debug": "npm run build && node --inspect index.js"
   },
   "keywords": [
     "Git",
@@ -21,11 +22,12 @@
   },
   "engines": {
     "node": ">=8.1.4",
-    "npm": "6.4.0"
+    "npm": ">=6.4.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.5",
-    "@babel/runtime-corejs2": "^7.1.5",
+    "@babel/runtime": "^7.2.0",
+    "@babel/runtime-corejs2": "^7.2.0",
+    "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
     "chalk": "^2.3.0",
     "clui": "^0.3.6",
     "figlet": "^1.2.1",
@@ -35,13 +37,18 @@
     "ora": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-transform-runtime": "^7.1.0",
-    "@babel/preset-env": "^7.1.6"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3"
   },
   "directories": {
+    "doc": "docs",
     "lib": "lib"
   },
-  "preferGlobal": true
+  "preferGlobal": true,
+  "bugs": {
+    "url": "https://github.com/Marvin1003/webpack-installer/issues"
+  },
+  "homepage": "https://github.com/Marvin1003/webpack-installer#readme"
 }

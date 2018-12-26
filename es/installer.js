@@ -11,10 +11,9 @@ const prompt = inquirer.createPromptModule();
 const cli = require("./cli");
 const createFolder = require("./manage/folder");
 const updatePackage = require("./manage/updatePackage");
-const dependencies = require("./manage/dependencies");
 const createStaticFiles = require("./manage/staticFiles");
 
-process.env.PREFIX = "installer:";
+process.env.GLOBAL_PREFIX = "installer:";
 process.env.SCRIPTS = [];
 
 (async function setup() {
@@ -31,33 +30,57 @@ process.env.SCRIPTS = [];
       res = await cliMenu(res);
     } while (!Array.isArray(res));
 
-    const path = res.map(input => input.toLowerCase()).join("/");
-    process.env.CONFIG = path;
+    const boilerplate = res.map(input => input.toLowerCase()).join("/");
+
+    process.env.BOILERPLATE_FOLDER = path.resolve(
+      __dirname,
+      `../configs/${boilerplate}`
+    );
+    process.env.CONFIG_PATH = path.resolve(
+      __dirname,
+      `${process.env.BOILERPLATE_FOLDER}/installer:config.json`
+    );
+
     generateConfig(res);
   })();
 
   async function generateConfig(configType) {
+    const config = await import(process.env.CONFIG_PATH);
+
     const configStr = `${configType[configType.length - 2]} - ${
       configType[configType.length - 1]
     }`;
 
     console.log(chalk.underline(`\nCreating ${configStr} config.\n`));
 
-    // CHECK IF PACKAGE.JSON EXISTS
-    if (!fs.existsSync(path.resolve(process.cwd(), "package.json"))) {
-      const spinner = ora("Initalizing npm project").start();
-      execSync(`npm init -y`, { cwd: process.cwd() });
-      spinner.succeed(chalk("Npm project initialised.\n"));
+    updatePackage(config);
+
+    // Install dependencies
+    var answer = await prompt({
+      type: "confirm",
+      message: chalk`Do you want to install the dependencies?`,
+      name: "confirm"
+    });
+
+    if (answer.confirm) {
+      console.log();
+      try {
+        execSync("npm install --silent", {
+          cwd: process.cwd(),
+          stdio: "inherit"
+        });
+        ora().succeed(chalk`Dependencies installed`);
+      } catch(err) {
+        ora().fail(chalk`Failed installing dependencies. Try 'npm install' afterwards.`)
+       }
     }
 
-    dependencies();
-    updatePackage();
-
     await createFolder(prompt);
-    await createStaticFiles(prompt, res);
+    await createStaticFiles(prompt, configType[configType.length - 1], config);
 
+    // Ask user if he wants to create a index.js if not already there
     if (!fs.pathExistsSync(path.resolve(process.cwd(), "src"))) {
-      const answer = await prompt({
+      var answer = await prompt({
         type: "confirm",
         message: chalk`Do you want to create {green.bold src/index.js}?`,
         name: "confirm"
@@ -68,8 +91,11 @@ process.env.SCRIPTS = [];
       }
     }
 
+    // Display available scripts
+    const packageJson = await import(path.resolve(process.cwd(), 'package.json'));
+
     console.log(chalk.underline("\nAvailable scripts:\n"));
-    for (const script of process.env.SCRIPTS.split(",")) {
+    for (const script of Object.keys(packageJson.scripts)) {
       console.log(chalk`npm run {green.bold ${script}}`);
     }
   }

@@ -4,7 +4,13 @@ const chalk = require("chalk");
 
 module.exports = async (src, dest, spinner, prompt) => {
   src = path.resolve(process.cwd(), src);
+
   const stats = fs.statSync(src);
+
+  const fileName = path.basename(src).toLocaleLowerCase();
+
+  if (fileName.includes(process.env.GLOBAL_PREFIX)) return false;
+
   const resolvedDest = path.resolve(process.cwd(), dest);
 
   if (stats.isFile() && !fs.pathExistsSync(resolvedDest))

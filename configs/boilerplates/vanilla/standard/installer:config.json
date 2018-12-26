@@ -1,0 +1,15 @@
+{
+  "package": {
+    "devDependencies": {
+      "css-loader": "latest",
+      "style-loader": "latest",
+      "optimize-css-assets-webpack-plugin": "latest",
+      "file-loader": "latest",
+      "url-loader": "latest",
+      "html-webpack-plugin": "latest"
+    },
+    "dependencies": {
+      "mini-css-extract-plugin": "latest"
+    }
+  }
+}
